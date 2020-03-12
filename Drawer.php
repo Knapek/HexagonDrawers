@@ -8,12 +8,13 @@ class Drawer extends SetOfDrawers
     private $idNumber;
     private $type;
     private $listOfItems = [];
-    private $listOfQuantities;
+    private $listOfQuantities = [];
 
     public function addItem(String $item, int $quantity):void 
     {
-        $this->listOfItems->array_push($item);
-        // $this->listOfQuantities->array_push($quantity);
+        
+        array_push($this->listOfItems, $item);
+        array_push($this->listOfQuantities, $quantity);
     }
     public function presentInside()
     {
