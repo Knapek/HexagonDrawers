@@ -1,11 +1,17 @@
 <?php
 
 declare(strict_types=1);
-require_once('Drawer.php');
-class Item extends Drawer
+// require_once('Drawer.php');
+class Item //extends Drawer
 {
     private $name;
     private $quantity;
+
+    public function __construct (String $name = '', int $quantity = 0)
+    {
+        $this->name = $name;
+        $this->quantity = $quantity;
+    }
 
     public function getName():String
     {
