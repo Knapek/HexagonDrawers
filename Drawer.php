@@ -16,8 +16,15 @@ class Drawer extends SetOfDrawers
         array_push($this->listOfItems, $item);
         array_push($this->listOfQuantities, $quantity);
     }
-    public function presentInside()
+    public function presentInside():void
     {
-        return $this->listOfItems;
+        // foreach ($this->listOfItems as $key => $value) {
+        //     foreach ($this->listOfQuantities as $key1 => $value1) {
+        //         echo $value,' ',$value1,PHP_EOL;
+        //     }
+        // }
+        for($i = 0 ; $i < count($this->listOfItems); $i++){
+            echo $this->listOfItems[$i], ' : ', $this->listOfQuantities[$i],PHP_EOL;
+        }
     }
 }
