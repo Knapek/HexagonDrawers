@@ -1,14 +1,19 @@
 <?php
 
 declare(strict_types=1);
-require_once('SetOfDrawers.php');
+//require_once('SetOfDrawers.php');
 
-class Drawer extends SetOfDrawers
+class Drawer //extends SetOfDrawers
 {
-    private $idNumber;
+    private static $idNumber = 0;
     private $type;
     private $listOfItems = [];
     private $listOfQuantities = [];
+
+    public function __construct(String $type = 'Półotwarta')
+    {
+        $this->type = $type;
+    }
 
     public function addItem(String $item, int $quantity):void 
     {
