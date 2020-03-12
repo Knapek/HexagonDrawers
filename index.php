@@ -14,3 +14,12 @@ $kondensator = new Item('Kondensator 100nF', 30);
 $kondensator->setQuantity(29);
 $jedynka->addItem($kondensator->getName(), $kondensator->getQuantity());
 $jedynka->presentInside();
+
+
+$dwojka = new Drawer();
+
+var_dump($jedynka);
+var_dump($dwojka);
+
+
+echo Drawer::$counter;

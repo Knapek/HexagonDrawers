@@ -5,14 +5,17 @@ declare(strict_types=1);
 
 class Drawer //extends SetOfDrawers
 {
-    private static $idNumber = 0;
+    public static $counter = 0;
+    private $idNumber;
     private $type;
     private $listOfItems = [];
     private $listOfQuantities = [];
 
     public function __construct(String $type = 'Półotwarta')
     {
+        $this->idNumber = Drawer::$counter;
         $this->type = $type;
+        Drawer::$counter++;
     }
 
     public function addItem(String $item, int $quantity):void 
