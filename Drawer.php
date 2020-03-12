@@ -9,7 +9,6 @@ class Drawer //extends SetOfDrawers
     private $idNumber;
     private $type;
     private $listOfItems = [];
-    private $listOfQuantities = [];
 
     public function __construct(String $type = 'Półotwarta')
     {
@@ -18,12 +17,12 @@ class Drawer //extends SetOfDrawers
         Drawer::$counter++;
     }
 
-    public function addItem(String $item, int $quantity):void 
+
+    public function addItemObj(Object $item):void 
     {
-        
         array_push($this->listOfItems, $item);
-        array_push($this->listOfQuantities, $quantity);
     }
+
     public function presentInside():void
     {
         // foreach ($this->listOfItems as $key => $value) {
