@@ -1,4 +1,15 @@
+.main_div{
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+    top: 50%;
+    margin-top: -50px;
+    
+
+}
+
 .hexagon {
+    transform: rotate(30deg);
     position: relative;
     width: 150px; 
     height: 86.60px;
@@ -6,6 +17,11 @@
     margin: 43.3px 0;
     border-left: solid 3px #333333;
     border-right: solid 3px #333333;
+
+    
+
+  
+    
   }
   
   .hexagon:before,
@@ -23,12 +39,14 @@
   }
   
   .hexagon:before {
+    // transform: rotate(90deg);
     top: -53.0330px;
     border-top: solid 4.2426px #333333;
     border-right: solid 4.2426px #333333;
   }
   
   .hexagon:after {
+    // transform: rotate(90deg);
     bottom: -53.0330px;
     border-bottom: solid 4.2426px #333333;
     border-left: solid 4.2426px #333333;

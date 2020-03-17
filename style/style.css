@@ -1,4 +1,13 @@
+.main_div {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -50px;
+}
+
 .hexagon {
+  transform: rotate(30deg);
   position: relative;
   width: 150px;
   height: 86.60px;
