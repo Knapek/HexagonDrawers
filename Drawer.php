@@ -25,13 +25,11 @@ class Drawer //extends SetOfDrawers
 
     public function presentInside():void
     {
-        // foreach ($this->listOfItems as $key => $value) {
-        //     foreach ($this->listOfQuantities as $key1 => $value1) {
-        //         echo $value,' ',$value1,PHP_EOL;
-        //     }
-        // }
-        for($i = 0 ; $i < count($this->listOfItems); $i++){
-            echo $this->listOfItems[$i], ' : ', $this->listOfQuantities[$i],PHP_EOL;
+        foreach ($this->listOfItems as $key => $value) {
+            
+                echo $key,' : ',$value->getName(), ', ilość: ', $value->getQuantity(),PHP_EOL;
+            
         }
+      
     }
 }
