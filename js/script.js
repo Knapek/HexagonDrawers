@@ -5,8 +5,11 @@ class Hexagon
         asd++;
         return `canvas${asd}`;
     }
-    addHexagon() {
-        var canvas = document.querySelector('#canvas').getContext('2d'),
+    addHexagon(_color) {
+
+        var name = this.createName();
+        
+        var canvas = document.querySelector(`#${name}`).getContext('2d'),
         side = 0,
         size = 100,
         x = 100,
@@ -19,24 +22,23 @@ class Hexagon
         canvas.lineTo(x + size * Math.cos(side * 2 * Math.PI / 6), y + size * Math.sin(side * 2 * Math.PI / 6));
         }
 
-        canvas.fillStyle = "#333333";
+        canvas.fillStyle = _color;
         canvas.fill();
     } 
 }
 
 class HexagonFactory 
 {
-    static createHexagon() {
+    static createHexagon(_color) {
         
-         return new Hexagon();      
+         return new Hexagon().addHexagon(_color);      
     }
 }
 
-var p = HexagonFactory.createHexagon();
-var a = HexagonFactory.createHexagon();
-var c = new Hexagon();
-console.log(a.createName());
-console.log(c.createName());
-console.log(p.createName());
+var pierwszy = HexagonFactory.createHexagon('blue');
+var drugi = HexagonFactory.createHexagon('red');
+var trzeci = HexagonFactory.createHexagon('green');
+
+
 
 
