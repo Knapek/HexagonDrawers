@@ -1,13 +1,13 @@
 var asd = 0;
 class Hexagon
 {
-    createName(){
+    static createName(){
         asd++;
         return `canvas${asd}`;
     }
-    addHexagon(_color) {
+    addHexagon(name) {
 
-        var name = this.createName();
+        var name = name;
         
         var canvas = document.querySelector(`#${name}`).getContext('2d'),
         side = 0,
@@ -22,23 +22,26 @@ class Hexagon
         canvas.lineTo(x + size * Math.cos(side * 2 * Math.PI / 6), y + size * Math.sin(side * 2 * Math.PI / 6));
         }
 
-        canvas.fillStyle = _color;
+        canvas.fillStyle = "#444444";
         canvas.fill();
+
+        return name;
     } 
 }
 
-class HexagonFactory 
-{
-    static createHexagon(_color) {
-        
-         return new Hexagon().addHexagon(_color);      
-    }
-}
-
-var pierwszy = HexagonFactory.createHexagon('blue');
-var drugi = HexagonFactory.createHexagon('red');
-var trzeci = HexagonFactory.createHexagon('green');
 
 
+
+$(document).ready(function(){
+
+
+    $('#button').click(function() {
+        var name = Hexagon.createName();
+        $(`<canvas id='${name}' width="400" height="400"></canvas>`).appendTo('body');
+        var name = new Hexagon().addHexagon(name);
+    });
+
+
+});
 
 
