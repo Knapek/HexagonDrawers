@@ -22,7 +22,7 @@ class Hexagon
         canvas.lineTo(x + size * Math.cos(side * 2 * Math.PI / 6), y + size * Math.sin(side * 2 * Math.PI / 6));
         }
 
-        canvas.fillStyle = "#444444";
+        canvas.fillStyle = "#0af402";
         canvas.fill();
 
         return name;
@@ -37,7 +37,7 @@ $(document).ready(function(){
 
     $('#button').click(function() {
         var name = Hexagon.createName();
-        $(`<canvas id='${name}' width="400" height="400"></canvas>`).appendTo('body');
+        $(`<canvas id='${name}' width="200" height="200"></canvas>`).appendTo('body');
         var name = new Hexagon().addHexagon(name);
     });
 
