@@ -5,3 +5,35 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.canvas1{
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  left: 64%;
+  transform: translate(-50%, -50%);
+}
+.canvas2{
+  margin: 0;
+  position: absolute;
+  top: 10%;
+  left: 64%;
+  transform: translate(-50%, -50%);
+}
+
+.relative{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200;
+    height: 200;
+    border: 3px solid black;
+}
+
+.absolute{
+  position: absolute;
+  top: -90px;
+  right: -155px;
+  width: 200;
+  height: 200;
+  border: 3px solid rgb(179, 7, 7);
+}
