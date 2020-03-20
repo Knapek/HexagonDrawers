@@ -34,7 +34,7 @@ class Hexagon
 
 $(document).ready(function(){
 
-
+    var primary = new Hexagon().addHexagon('canvas0');
     $('#button').click(function() {
         var name = Hexagon.createName();
         $(`<canvas id='${name}' width="200" height="200"></canvas>`).appendTo('body');
