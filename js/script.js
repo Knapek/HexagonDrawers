@@ -24,6 +24,7 @@ class Hexagon
 
         canvas.fillStyle = "#0af402";
         canvas.fill();
+        canvas.stroke();
 
         return name;
     } 
@@ -35,8 +36,8 @@ class Hexagon
 $(document).ready(function(){
 
     var primary = new Hexagon().addHexagon('canvas0');
-    var primary = new Hexagon().addHexagon('canvas1');
-    var primary = new Hexagon().addHexagon('canvas2');
+    // var primary = new Hexagon().addHexagon('canvas1');
+    // var primary = new Hexagon().addHexagon('canvas2');
     $('#button').click(function() {
         var name = Hexagon.createName();
         $(`<canvas id='${name}' width="200" height="200"></canvas>`).appendTo('body');
