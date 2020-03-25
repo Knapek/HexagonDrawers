@@ -1,14 +1,15 @@
-var asd = 0;
+var uniqueIdForCanvasName = 0; // unique variable used by function createName(); 
 class Hexagon
 {
-    static createName(){
-        asd++;
-        return `canvas${asd}`;
+    static createName() //function that create unique name for canvas element wit help of variable 'uniqueIdForCanvasElement' ans returns it
+    {  
+        uniqueIdForCanvasName++;
+        return `canvas${uniqueIdForCanvasName}`;
     }
-    addHexagon(name) {
-
+    addHexagon(name)  // function that draws hexagon element 
+    {
         var name = name;
-        
+
         var canvas = document.querySelector(`#${name}`).getContext('2d'),
         side = 0,
         size = 100,
@@ -25,25 +26,28 @@ class Hexagon
         canvas.fillStyle = "#0af402";
         canvas.fill();
         canvas.stroke();
-
-        return name;
     } 
 }
 
 
 
 
-$(document).ready(function(){
-
+$(document).ready(function()
+{
     var primary = new Hexagon().addHexagon('canvas0');
-    // var primary = new Hexagon().addHexagon('canvas1');
-    // var primary = new Hexagon().addHexagon('canvas2');
-    $('#button').click(function() {
+
+    $('#button').click(function() 
+    {
         var name = Hexagon.createName();
         $(`<canvas id='${name}' width="200" height="200"></canvas>`).appendTo('body');
         var name = new Hexagon().addHexagon(name);
     });
 
+    $('canvas').click(function (event)      // Event Listener attached to all canvas elements. 
+    {    
+        var id = event.target.id            // id of canvas element that were just clicked 
+        console.log(id);                    
+    });
 
 });
 
