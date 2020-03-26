@@ -39,16 +39,25 @@ $(document).ready(function()
     $('#button').click(function() 
     {
         var name = Hexagon.createName();
-        $(`<canvas id='${name}' width="200" height="200"></canvas>`).appendTo('body');
+        // $(`<canvas id='${name}' width="200" height="200"></canvas>`).appendTo('body');
         var name = new Hexagon().addHexagon(name);
     });
 
-    $('canvas').click(function (event)      // Event Listener attached to all canvas elements. 
+    var idOfClickedCanvas;                              // Global variable keeps id of current clicked hexagon. signed by click listener of canvas elements.
+    $('canvas').click(function siema(event)             // Event Listener attached to all canvas elements. 
     {    
-        var id = event.target.id            // id of canvas element that were just clicked 
-        console.log(id);                    
+        idOfClickedCanvas = event.target.id;            // id of canvas element that were just clicked 
+        console.log(idOfClickedCanvas);   
+        
     });
 
+    $('.buttonAddHexagonInToggleMenu').click(function(e) {    
+        console.log(idOfClickedCanvas);
+    });
+
+  
+  
+    
 });
 
 
