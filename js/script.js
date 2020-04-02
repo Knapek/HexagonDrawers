@@ -35,29 +35,59 @@ class Hexagon
 $(document).ready(function()
 {
     var primary = new Hexagon().addHexagon('canvas0');
+    var idOfClickedCanvas;  // Global variable keeps id of current clicked hexagon. signed by click listener of canvas elements.
+    $('#button').click(function(event) 
+    {   
+        event.preventDefault();
+        
+        /**
+         * Craete array name: , value:  , to get access to value which is numer of hexagon position
+         * #pickHexagonPlace is input type humber where user can decide which hexagon will be created.
+         */
+        const absoulteIdArray = $('#pickHexagonPlace').serializeArray(); 
 
-    $('#button').click(function() 
-    {
-        var name = Hexagon.createName();
-        // $(`<canvas id='${name}' width="200" height="200"></canvas>`).appendTo('body');
-        var name = new Hexagon().addHexagon(name);
+        /**
+         *    variable absoluteId will define which div class will be used. example. 
+         *    'absolute2'. This class determines which hexagon will be created
+         *                   ____1____
+         *                  /         \
+         *               6 /           \ 2
+         *                /             \
+         *                \             /
+         *               5 \           / 3
+         *                  \_________/
+         *                       4 
+         */
+        const absoluteId = absoulteIdArray[0].value; // choosen position of hexagon transfer to div class name.
+
+        if(absoluteId){    //if 
+            const name = Hexagon.createName();
+
+            $(`<div class="absolute${absoluteId}">
+            <canvas  width="200" height="200" id="${name}" ></canvas>
+            </div>`).appendTo('div.primary');
+       
+            var hex = new Hexagon().addHexagon(name);
+        }else{
+            alert('Podaj pozycje hexagonu!');
+        }
     });
 
-    var idOfClickedCanvas;                              // Global variable keeps id of current clicked hexagon. signed by click listener of canvas elements.
+                           
     $('canvas').click(function siema(event)             // Event Listener attached to all canvas elements. 
-    {    
+    {   
         idOfClickedCanvas = event.target.id;            // id of canvas element that were just clicked 
         console.log(idOfClickedCanvas);   
-        
+        console.log($('#pickHexagonPlace').valueAsNumber);
+        return
     });
 
     $('.buttonAddHexagonInToggleMenu').click(function(e) {    
         console.log(idOfClickedCanvas);
+        var className = $(`#${idOfClickedCanvas}`).parent().attr('class').replace(/ show/,'');  //get Parent class name, needed to append dew hexagon. 
+        console.log(className);
     });
 
-  
-  
-    
 });
 
 

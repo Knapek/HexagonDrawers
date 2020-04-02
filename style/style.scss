@@ -10,14 +10,14 @@
     margin-bottom: -108px;
     // border: 1px solid black;
 }
-.absolute1{
-  position: absolute;
-  top: -173px;
-  right: 0px;
-  width: 200;
-  height: 200;
-  // border: 1px solid rgb(179, 7, 7);
-}
+.absolute1{                                   //                  ____1____
+  position: absolute;                         //                 /         \
+  top: -173px;                                //              6 /           \ 2
+  right: 0px;                                 //               /             \
+  width: 200;                                 //               \             /
+  height: 200;                                //              5 \           / 3
+  // border: 1px solid rgb(179, 7, 7);        //                 \_________/
+}                                             //                      4 
 .absolute2{
   position: absolute;
   top: -86.6025px;
