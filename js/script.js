@@ -36,8 +36,24 @@ $(document).ready(function()
 {
     var primary = new Hexagon().addHexagon('canvas0');
     var idOfClickedCanvas;  // Global variable keeps id of current clicked hexagon. signed by click listener of canvas elements.
+
     $('#button').click(function(event) 
     {   
+       
+    });
+
+                           
+    $('canvas').click(function (event)             // Event Listener attached to all canvas elements. 
+    {   
+        idOfClickedCanvas = event.target.id;            // id of canvas element that were just clicked 
+        console.log(idOfClickedCanvas);   
+    });
+
+    $('.buttonAddHexagonInToggleMenu').click(function(e) {    
+        console.log(idOfClickedCanvas);
+        var parentClassName = $(`#${idOfClickedCanvas}`).parent().attr('class').replace(/ show/,'');  //get Parent class name, needed to append dew hexagon. 
+        console.log(parentClassName);
+
         event.preventDefault();
         
         /**
@@ -61,31 +77,20 @@ $(document).ready(function()
         const absoluteId = absoulteIdArray[0].value; // choosen position of hexagon transfer to div class name.
 
         if(absoluteId){    //if 
-            const name = Hexagon.createName();
+            const uniqueHexagonName = Hexagon.createName();
 
             $(`<div class="absolute${absoluteId}">
-            <canvas  width="200" height="200" id="${name}" ></canvas>
-            </div>`).appendTo('div.primary');
+                <canvas type="button" width="200" height="200" id="${uniqueHexagonName}" title="${uniqueHexagonName}" data-container="body" 
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></canvas>
+                <div class="dropdown-menu" aria-labelledby="${uniqueHexagonName}">
+                <button class="btn btn-success buttonAddHexagonInToggleMenu" >Dodaj Hexagon</button>
+                </div>
+            </div>`).appendTo(`div.${parentClassName}`);
        
-            var hex = new Hexagon().addHexagon(name);
+            var hex = new Hexagon().addHexagon(uniqueHexagonName);
         }else{
             alert('Podaj pozycje hexagonu!');
         }
-    });
-
-                           
-    $('canvas').click(function siema(event)             // Event Listener attached to all canvas elements. 
-    {   
-        idOfClickedCanvas = event.target.id;            // id of canvas element that were just clicked 
-        console.log(idOfClickedCanvas);   
-        console.log($('#pickHexagonPlace').valueAsNumber);
-        return
-    });
-
-    $('.buttonAddHexagonInToggleMenu').click(function(e) {    
-        console.log(idOfClickedCanvas);
-        var className = $(`#${idOfClickedCanvas}`).parent().attr('class').replace(/ show/,'');  //get Parent class name, needed to append dew hexagon. 
-        console.log(className);
     });
 
 });
