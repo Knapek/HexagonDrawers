@@ -43,13 +43,18 @@ $(document).ready(function()
     });
 
                            
-    $('canvas').click(function (event)             // Event Listener attached to all canvas elements. 
+    $(document).on('mousedown', 'canvas', function (event)      // Event Listener attached to all canvas elements. 
     {   
-        idOfClickedCanvas = event.target.id;            // id of canvas element that were just clicked 
-        console.log(idOfClickedCanvas);   
+        var lastIdOfClickedCanvas = idOfClickedCanvas;
+        if(!(lastIdOfClickedCanvas == event.target.id))         //if different hexagon has been clicked compare to last time clicked hexagon (!)        
+        {
+            idOfClickedCanvas = event.target.id;                // id of canvas element that were just clicked 
+            console.log(idOfClickedCanvas);             
+        }
+        
     });
 
-    $('.buttonAddHexagonInToggleMenu').click(function(e) {    
+    $(document).on('mousedown','.buttonAddHexagonInToggleMenu', function(e) {    
         console.log(idOfClickedCanvas);
         var parentClassName = $(`#${idOfClickedCanvas}`).parent().attr('class').replace(/ show/,'');  //get Parent class name, needed to append dew hexagon. 
         console.log(parentClassName);
@@ -76,7 +81,7 @@ $(document).ready(function()
          */
         const absoluteId = absoulteIdArray[0].value; // choosen position of hexagon transfer to div class name.
 
-        if(absoluteId){    //if 
+        if(absoluteId){    //if position has been provided in HTML input element
             const uniqueHexagonName = Hexagon.createName();
 
             $(`<div class="absolute${absoluteId}">
