@@ -59,7 +59,7 @@ $(document).ready(function()
         if(!(lastIdOfClickedCanvas == event.target.id))         
         {
             idOfClickedCanvas = event.target.id; // id of canvas element that were just clicked 
-            console.log(idOfClickedCanvas);             
+            console.log('Id of clicked canvas: '+ idOfClickedCanvas);             
         }
 
         //if different hexagon has been clicked comparing to hexagon clicked last time (!)
@@ -67,7 +67,7 @@ $(document).ready(function()
         {
             //get Parent class name, needed to append new hexagon. 
             actualClickedParentClassName = $(`#${idOfClickedCanvas}`).parent().attr('class').replace(/ show/,'');
-            console.log(actualClickedParentClassName);
+            console.log('Actual clicked Parent Class name: ' + actualClickedParentClassName);
         }
     });
 
@@ -80,7 +80,7 @@ $(document).ready(function()
          * Craete array name: , value:  , to get access to value which is numer of hexagon position
          * #pickHexagonPlace is input type humber where user can decide which hexagon will be created.
          */
-        const absoulteIdArray = $('#pickHexagonPlace').serializeArray(); 
+        const absoulteIdArray = $(`input#${idOfClickedCanvas}`).serializeArray(); 
 
         /**
          *    variable absoluteId will define which div class will be used. example. 
@@ -95,7 +95,7 @@ $(document).ready(function()
          *                       4 
          */
         const absoluteId = absoulteIdArray[0].value; // choosen position of hexagon transfer to div class name.
-
+        console.log('absolute ID: ' + absoluteId);
         if(absoluteId){    //if position has been provided in HTML input element
             const uniqueHexagonName = Hexagon.createName();
 
@@ -104,7 +104,7 @@ $(document).ready(function()
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></canvas>
                 <div class="dropdown-menu" aria-labelledby="${uniqueHexagonName}">
                     <button class="btn btn-success buttonAddHexagonInToggleMenu" >Dodaj Hexagon</button>
-                    <input type="number" id="pickHexagonPlace" name="hexagonPlace" />
+                    <input type="number" id="${uniqueHexagonName}" name="hexagonPlace" />
                 </div>
             </div>`).appendTo(`div.${actualClickedParentClassName}`);
        
