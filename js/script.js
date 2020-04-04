@@ -1,12 +1,15 @@
 var uniqueIdForCanvasName = 0; // unique variable used by function createName(); 
 class Hexagon
 {
-    static createName() //function that create unique name for canvas element wit help of variable 'uniqueIdForCanvasElement' ans returns it
+    //function that create unique name for canvas element wit help of variable 'uniqueIdForCanvasElement' ans returns it
+    static createName() 
     {  
         uniqueIdForCanvasName++;
         return `canvas${uniqueIdForCanvasName}`;
     }
-    addHexagon(name)  // function that draws hexagon element 
+
+    // function that draws hexagon element 
+    addHexagon(name)  
     {
         var name = name;
 
@@ -35,29 +38,41 @@ class Hexagon
 $(document).ready(function()
 {
     var primary = new Hexagon().addHexagon('canvas0');
-    var idOfClickedCanvas;  // Global variable keeps id of current clicked hexagon. signed by click listener of canvas elements.
 
+    // Global variable keeps id of current clicked hexagon. signed by on(mousedown) listener of canvas elements.
+    var idOfClickedCanvas; 
+
+    // Global variable keeps parent class name of current clicked hexagon. signed by on(mousedown) listener of canvas elements.
+    var actualClickedParentClassName;
     $('#button').click(function(event) 
     {   
        
     });
 
-                           
-    $(document).on('mousedown', 'canvas', function (event)      // Event Listener attached to all canvas elements. 
+    // Event Listener attached to all canvas elements.                       
+    $(document).on('mousedown', 'canvas', function (event)  
     {   
         var lastIdOfClickedCanvas = idOfClickedCanvas;
-        if(!(lastIdOfClickedCanvas == event.target.id))         //if different hexagon has been clicked compare to last time clicked hexagon (!)        
+        var lastClickedParentClassName = actualClickedParentClassName;
+
+        //if different hexagon has been clicked comparing to hexagon clicked last time (!)
+        if(!(lastIdOfClickedCanvas == event.target.id))         
         {
-            idOfClickedCanvas = event.target.id;                // id of canvas element that were just clicked 
+            idOfClickedCanvas = event.target.id; // id of canvas element that were just clicked 
             console.log(idOfClickedCanvas);             
         }
-        
+
+        //if different hexagon has been clicked comparing to hexagon clicked last time (!)
+        if(!(lastClickedParentClassName == $(`#${idOfClickedCanvas}`).parent().attr('class').replace(/ show/,''))) 
+        {
+            //get Parent class name, needed to append new hexagon. 
+            actualClickedParentClassName = $(`#${idOfClickedCanvas}`).parent().attr('class').replace(/ show/,'');
+            console.log(actualClickedParentClassName);
+        }
     });
 
     $(document).on('mousedown','.buttonAddHexagonInToggleMenu', function(e) {    
-        console.log(idOfClickedCanvas);
-        var parentClassName = $(`#${idOfClickedCanvas}`).parent().attr('class').replace(/ show/,'');  //get Parent class name, needed to append dew hexagon. 
-        console.log(parentClassName);
+        
 
         event.preventDefault();
         
@@ -88,9 +103,10 @@ $(document).ready(function()
                 <canvas type="button" width="200" height="200" id="${uniqueHexagonName}" title="${uniqueHexagonName}" data-container="body" 
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></canvas>
                 <div class="dropdown-menu" aria-labelledby="${uniqueHexagonName}">
-                <button class="btn btn-success buttonAddHexagonInToggleMenu" >Dodaj Hexagon</button>
+                    <button class="btn btn-success buttonAddHexagonInToggleMenu" >Dodaj Hexagon</button>
+                    <input type="number" id="pickHexagonPlace" name="hexagonPlace" />
                 </div>
-            </div>`).appendTo(`div.${parentClassName}`);
+            </div>`).appendTo(`div.${actualClickedParentClassName}`);
        
             var hex = new Hexagon().addHexagon(uniqueHexagonName);
         }else{
