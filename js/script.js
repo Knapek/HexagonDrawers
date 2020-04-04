@@ -1,19 +1,27 @@
 var uniqueIdForCanvasName = 0; // unique variable used by function createName(); 
 class Hexagon
 {
+    
+    constructor(uniqueHexagonName){
+       this.uniqueHexagonName = uniqueHexagonName;
+    }
     //function that create unique name for canvas element wit help of variable 'uniqueIdForCanvasElement' ans returns it
     static createName() 
     {  
         uniqueIdForCanvasName++;
-        return `canvas${uniqueIdForCanvasName}`;
+        return 'canvas'+uniqueIdForCanvasName;
+    }
+
+    getUniqueHexagonName(){
+        return this.uniqueHexagonName;
     }
 
     // function that draws hexagon element 
-    addHexagon(name)  
+    addHexagon()  
     {
-        var name = name;
+        
 
-        var canvas = document.querySelector(`#${name}`).getContext('2d'),
+        var canvas = document.querySelector(`#${this.uniqueHexagonName}`).getContext('2d'),
         side = 0,
         size = 100,
         x = 100,
@@ -33,14 +41,25 @@ class Hexagon
 }
 
 
-
+/*
+--------------------------------------------
+*/
 
 $(document).ready(function()
 {
-    var primary = new Hexagon().addHexagon('canvas0');
+    var arrayOfHexagonObjects = []; 
+    var newHexagonObject = new Hexagon('canvas0'); // New object class Hexagon;
+    
+    var currentClickedHexagonId;
+    
+    newHexagonObject.addHexagon();  //Draw hexagon using canvas methods. Default Hexagon dispayed on page
+    
+    arrayOfHexagonObjects.push(newHexagonObject); // Add default hexagon to array. 
+    console.log(arrayOfHexagonObjects);
 
     // Global variable keeps id of current clicked hexagon. signed by on(mousedown) listener of canvas elements.
     var idOfClickedCanvas; 
+
 
     // Global variable keeps parent class name of current clicked hexagon. signed by on(mousedown) listener of canvas elements.
     var actualClickedParentClassName;
@@ -52,13 +71,22 @@ $(document).ready(function()
     // Event Listener attached to all canvas elements.                       
     $(document).on('mousedown', 'canvas', function (event)  
     {   
+        idOfClickedCanvas = event.target.id;
+        console.log(newHexagonObject.uniqueHexagonName);
+        var indexOfClickedObject = parseInt(idOfClickedCanvas.replace(/canvas/,''));
+        console.log('siemaaa : ' + indexOfClickedObject)
+
+        console.log(idOfClickedCanvas)
+        idOfClickedCanvas = arrayOfHexagonObjects[indexOfClickedObject].uniqueHexagonName;
+        console.log(idOfClickedCanvas)
         var lastIdOfClickedCanvas = idOfClickedCanvas;
         var lastClickedParentClassName = actualClickedParentClassName;
 
         //if different hexagon has been clicked comparing to hexagon clicked last time (!)
         if(!(lastIdOfClickedCanvas == event.target.id))         
         {
-            idOfClickedCanvas = event.target.id; // id of canvas element that were just clicked 
+            idOfClickedCanvas = newHexagonObject.uniqueHexagonName; // id of canvas element that were just clicked 
+            
             console.log('Id of clicked canvas: '+ idOfClickedCanvas);             
         }
 
@@ -73,7 +101,7 @@ $(document).ready(function()
 
     $(document).on('mousedown','.buttonAddHexagonInToggleMenu', function(e) {    
         
-
+        
         event.preventDefault();
         
         /**
@@ -98,7 +126,7 @@ $(document).ready(function()
         console.log('absolute ID: ' + absoluteId);
         if(absoluteId){    //if position has been provided in HTML input element
             const uniqueHexagonName = Hexagon.createName();
-
+            
             $(`<div class="absolute${absoluteId}">
                 <canvas type="button" width="200" height="200" id="${uniqueHexagonName}" title="${uniqueHexagonName}" data-container="body" 
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></canvas>
@@ -108,10 +136,15 @@ $(document).ready(function()
                 </div>
             </div>`).appendTo(`div.${actualClickedParentClassName}`);
        
-            var hex = new Hexagon().addHexagon(uniqueHexagonName);
+            newHexagonObject = new Hexagon(uniqueHexagonName);
+            newHexagonObject.addHexagon();
+            arrayOfHexagonObjects.push(newHexagonObject);
+        
+            
         }else{
             alert('Podaj pozycje hexagonu!');
         }
+        console.log(arrayOfHexagonObjects);
     });
 
 });
