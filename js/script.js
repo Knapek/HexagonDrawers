@@ -1,7 +1,6 @@
 var uniqueIdForCanvasName = 0; // unique variable used by function createName(); 
 class Hexagon
 {
-    
     constructor(uniqueHexagonName){
        this.uniqueHexagonName = uniqueHexagonName;
     }
@@ -19,8 +18,6 @@ class Hexagon
     // function that draws hexagon element 
     addHexagon()  
     {
-        
-
         var canvas = document.querySelector(`canvas#${this.uniqueHexagonName}`).getContext('2d'),
         side = 0,
         size = 100,
@@ -127,8 +124,7 @@ $(document).ready(function()
         if($(`div#${idOfClickedCanvas}`).children().hasClass(`absolute${absoluteId}`))
         {
             alert('Taki już istnieje')
-        }
-        else{
+        }else{
             if(1 <= absoluteId && absoluteId <=6){    //if position has been provided in HTML input element
                 const uniqueHexagonName = Hexagon.createName();
                 
