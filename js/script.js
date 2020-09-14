@@ -44,6 +44,7 @@ class Hexagon
 
 $(document).ready(function()
 {
+    alert('Kliknij na szesciokąt i wybierz numer, o który zostanie rozbudowana półka.');
     var arrayOfHexagonObjects = []; 
     var newHexagonObject = new Hexagon('canvas0'); // New object class Hexagon;
     
